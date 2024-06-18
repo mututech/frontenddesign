@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leaflet Map with D3 Elevation Profile</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+        #map {
+            height: 100vh;
+            width: 100%;
+            position: relative;
+        }
+        #chart {
+            height: 200px;
+            width: 80%;
+            position: absolute;
+            bottom: 20px;
+            left: 10%;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            padding: 20px;
+            z-index: 1000;
+        }
+        .highlight {
+            fill: red;
+            r: 5;
+        }
+        .overlay {
+            fill: none;
+            pointer-events: all;
+        }
+        .line {
+            fill: none;
+            stroke: #00796b;
+            stroke-width: 2px;
+        }
+        .axis path,
+        .axis line {
+            fill: none;
+            shape-rendering: crispEdges;
+            stroke: #bdbdbd;
+        }
+        .axis text {
+            font-size: 12px;
+            fill: #757575;
+        }
+    </style>
+</head>
+<body>
+    <div id="map"></div>
+    <div id="chart"></div>
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
