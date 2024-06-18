@@ -1,0 +1,113 @@
+body {
+    font-family: 'Roboto', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background-color: var(--background-color, #f4f4f4);
+    transition: background-color 0.3s ease;
+}
+
+.container {
+    padding: 15px;
+    margin-top: 20px;
+    background-color: var(--container-bg-color, #ffffff);
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 90%;
+    max-width: 900px;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.input-field {
+    margin-bottom: 10px;
+}
+
+table {
+    width: 100%;
+    margin-top: 10px;
+    font-size: 0.8rem;
+}
+
+th, td {
+    padding: 8px;
+    text-align: center;
+}
+
+thead {
+    background-color: var(--header-bg-color, #f5f5f5);
+}
+
+tbody tr:nth-child(odd) {
+    background-color: var(--row-odd-bg-color, #f9f9f9);
+}
+
+tbody tr:nth-child(even) {
+    background-color: var(--row-even-bg-color, #fff);
+}
+
+.heat {
+    color: #fff;
+    transition: background-color 0.3s ease;
+}
+
+.dark-theme {
+    --background-color: #121212;
+    --container-bg-color: #1e1e1e;
+    --header-bg-color: #2c2c2c;
+    --row-odd-bg-color: #2c2c2c;
+    --row-even-bg-color: #1e1e1e;
+    /* --text-color: #ffffff; */
+    color: #ffffff;
+}
+
+.light-theme {
+    --background-color: #f4f4f4;
+    --container-bg-color: #ffffff;
+    --header-bg-color: #f5f5f5;
+    --row-odd-bg-color: #f9f9f9;
+    --row-even-bg-color: #ffffff;
+    color: #141313;
+}
+
+.heat.low {
+    background-color: #a5d6a7; /* Light Green */
+}
+
+.heat.medium {
+    background-color: #ffe082; /* Light Yellow */
+}
+
+.heat.high {
+    background-color: #ef9a9a; /* Light Red */
+}
+
+.btn-group {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 10px;
+}
+
+.btn-group .btn-small {
+    margin: 0 5px;
+    padding: 6px 12px;
+}
+
+.slider-label {
+    position: absolute;
+    top: 0px;
+    left: 0;
+    right: 0;
+    text-align: center;
+}
+
+.noUi-tooltip {
+    display: block;
+    background: #333;
+    color: #fff;
+    border-radius: 3px;
+    padding: 5px;
+    font-size: 0.8rem;
+    white-space: nowrap;
+}

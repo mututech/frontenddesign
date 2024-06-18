@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coach Bus Route Planner</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <link rel="shortcut icon" type="image/x-icon" href="docs/images/favicon.ico" />
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+        integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+    
+
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+    <header>
+        <nav>
+            <div class="nav-wrapper">
+                <a href="#" class="brand-logo">Route Planner</a>
+                <ul id="nav-mobile" class="right hide-on-med-and-down">
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">Routes</a></li>
+                    <li><a href="#">About</a></li>
+                    <li><a href="#">Contact</a></li>
+                    <li>
+                        <button id="theme-toggle" class="btn-flat">
+                            <i class="fas fa-sun" id="theme-icon"></i>
+                        </button>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <main class="row">
+        <div class="col s3 sidebar left-sidebar" id="left-sidebar">
+            <button class="toggle-button btn" onclick="toggleSidebar('left-sidebar')">Collapse</button>
+            <div class="form-group">
+                <label>Starting Point</label>
+                <input type="text" class="input-field">
+            </div>
+            <div class="form-group">
+                <label>Destination</label>
+                <input type="text" class="input-field">
+            </div>
+            <div class="form-group">
+                <label>Via Points</label>
+                <input type="text" class="input-field">
+            </div>
+            <div class="form-group">
+                <label>Fast or Slow Route</label>
+                <select class="input-field">
+                    <option>Fast</option>
+                    <option>Slow</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Date and Time</label>
+                <input type="datetime-local" class="input-field">
+            </div>
+            <div class="form-group">
+                <label>Vehicle Type</label>
+                <select class="input-field">
+                    <option>A</option>
+                    <option>B</option>
+                    <option>C</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Passenger Count</label>
+                <input type="number" class="input-field">
+            </div>
+            <div class="form-group">
+                <label>Temperature</label>
+                <input type="number" class="input-field">
+            </div>
+        </div>
+
+        <div class="col s3 sidebar right-sidebar" id="right-sidebar">
+            <button class="toggle-button btn" onclick="toggleSidebar('right-sidebar')">Collapse</button>
+            <div class="form-group">
+                <label>Flexible Departure Time</label>
+                <input type="range" min="0" max="24" class="input-field">
+            </div>
+            <div class="form-group">
+                <label>Speed Adjustment</label>
+                <input type="range" min="0" max="100" class="input-field">
+            </div>
+            <div class="form-group">
+                <label>Plan for Breaks</label>
+                <p>Mandatory break of 45 minutes for every 4.5 hours of driving.</p>
+            </div>
+            <div class="form-group">
+                <label>Suggest Stops</label>
+                <p>
+                    <label>
+                        <input type="checkbox" />
+                        <span>Restaurants</span>
+                    </label>
+                    <label>
+                        <input type="checkbox" />
+                        <span>Gas Stations</span>
+                    </label>
+                </p>
+            </div>
+            <div class="form-group">
+                <label>Quick Share</label>
+                <button class="btn" onclick="generateQRCode()">Generate QR Code</button>
+                <div id="qrcode"></div>
+            </div>
+        </div>
+
+        <div class="col s6 center">
+            <!-- Leaflet map will be initialized here -->
+            <div class="map-container card">
+                <div id="map"></div>
+            </div>
+            
+            <div class="cards-container row">
+                <div class="col s4 card route-card">
+                    <div class="card-content">
+                        <div class="route-header">
+                            <span class="route-badge blue">ROUTE 1</span>
+                            <button class="btn-floating btn-small waves-effect waves-light grey">
+                                <i class="fas fa-plus"></i>
+                            </button>
+                        </div>
+                        <span class="card-title">Route 1</span>
+                        <p>Distance: 100 km</p>
+                        <p>Time: 1.5 hours</p>
+                        <p>CO2: 50 kg</p>
+                    </div>
+                </div>
+                <div class="col s4 card route-card">
+                    <div class="card-content">
+                        <div class="route-header">
+                            <span class="route-badge brown">ROUTE 2</span>
+                            <button class="btn-floating btn-small waves-effect waves-light grey">
+                                <i class="fas fa-plus"></i>
+                            </button>
+                        </div>
+                        <span class="card-title">Route 2</span>
+                        <p>Distance: 120 km</p>
+                        <p>Time: 2 hours</p>
+                        <p>CO2: 60 kg</p>
+                    </div>
+                </div>
+                <div class="col s4 card route-card">
+                    <div class="card-content">
+                        <div class="route-header">
+                            <span class="route-badge darkblue">ROUTE 3</span>
+                            <button class="btn-floating btn-small waves-effect waves-light grey">
+                                <i class="fas fa-plus"></i>
+                            </button>
+                        </div>
+                        <span class="card-title">Route 3</span>
+                        <p>Distance: 140 km</p>
+                        <p>Time: 2.5 hours</p>
+                        <p>CO2: 70 kg</p>
+                    </div>
+                </div>
+            </div>
+            <div class="heatmap-container card">
+                <div class="card-content">
+                    <span class="card-title">Heatmap Based on Departure Window</span>
+                    <!-- Heatmap content -->
+                </div>
+            </div>
+            <div class="weather-widget card">
+                <div class="card-content">
+                    <span class="card-title">Weather Information</span>
+                    <p>Windspeed: 15 km/h</p>
+                    <p>Temperature: 20°C</p>
+                    <p>Sky Condition: Clear</p>
+                </div>
+            </div>
+            <div class="timeline-container card">
+                <div class="card-content">
+                    <span class="card-title">Route Timeline</span>
+                    <div class="timeline-item">Start Point</div>
+                    <div class="timeline-item">Via 1</div>
+                    <div class="timeline-item">Via 2</div>
+                    <div class="timeline-item">Destination</div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+    integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.min.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>

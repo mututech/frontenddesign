@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Heat Matrix</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/15.5.0/nouislider.min.css">
+        <!-- Other head elements -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+    
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container z-depth-3">
+        <div class="row">
+            <div class="input-field col s12">
+                <label for="dataType" class="active">Select Data Type</label>
+                <select id="dataType" class="browser-default">
+                    <option value="traffic" selected>Traffic Time</option>
+                    <option value="fuel">Fuel Consumption</option>
+                    <option value="distance">Distance</option>
+                </select>
+            </div>
+            <div class="input-field col s12">
+                <label class="slider-label" style="position: relative; top: -20px;">Time Range</label>
+                <div id="timeRangeSlider"></div>
+            </div>
+            <div class="input-field col s12">
+                <div class="btn-group" id="timeStepButtons">
+                    <button class="btn-small" data-step="60">1 hour</button>
+                    <button class="btn-small" data-step="30">30 minutes</button>
+                    <button class="btn-small" data-step="15">15 minutes</button>
+                </div>
+            </div>
+            <div class="switch col s12">
+                <label>
+                    Light
+                    <input type="checkbox" id="themeSwitch">
+                    <span class="lever"></span>
+                    Dark
+                </label>
+            </div>
+        </div>
+        <table id="heatMatrix" class="highlight centered">
+            <thead>
+                <tr id="timeHeaders"></tr>
+            </thead>
+            <tbody id="matrixBody">
+                <tr>
+                    <td>Route 1</td>
+                </tr>
+                <tr>
+                    <td>Route 2</td>
+                </tr>
+                <tr>
+                    <td>Route 3</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/15.5.0/nouislider.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="scripts.js"></script>
+</body>
+</html>
