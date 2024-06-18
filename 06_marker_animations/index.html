@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leaflet Map Animation</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css">
+    <style>
+        #map {
+            height: 400px;
+            width: 100%;
+        }
+        .control-panel {
+            margin: 10px;
+        }
+        #chartContainer {
+            height: 400px;
+            width: 100%;
+            overflow-x: scroll;
+        }
+        canvas {
+            width: 1000px;
+            height: 400px;
+        }
+    </style>
+</head>
+<body>
+    <div id="map"></div>
+    <div class="control-panel">
+        <button id="play">Play</button>
+        <button id="pause">Pause</button>
+        <button id="reset">Reset</button>
+        <input type="file" id="file-input" accept=".csv">
+        <label for="speed">Speed (km/h):</label>
+        <input type="number" id="speed" value="60">
+    </div>
+    <div id="chartContainer">
+        <canvas id="speedChart"></canvas>
+    </div>
+
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/papaparse@5.3.0/papaparse.min.js"></script>
+    <script src="main.js"></script>
+</body>
+</html>
